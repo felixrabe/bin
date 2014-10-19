@@ -1,0 +1,20 @@
+#!/usr/bin/env bashsh-0
+
+# Cross-platform Sublime Text 3 wrapper
+
+case "$(uname -s)" in
+  Darwin)
+    exec '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' "$@"
+    ;;
+  Linux)
+    if [[ "$1" = "-w" ]] ; then
+      shift  # chop off '-w'
+    fi
+    MSG "WARNING: Actually executing: nano $@"
+    nano "$@"
+    return
+    ;;
+  *)
+    exec '/c/Program Files/Sublime Text 3/subl' "$@"
+    ;;
+esac

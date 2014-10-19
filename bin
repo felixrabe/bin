@@ -1,0 +1,7 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $# -eq 0 ]] ; then
+  "$DIR/s" "$DIR"
+else
+  "$DIR/l" "$DIR/$1"
+fi

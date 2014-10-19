@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+if [[ "$0" = "${BASH_SOURCE[0]}" ]] ; then  # '#!/usr/bin/env bashsh-0'
+  DIR="$( cd "$( dirname "$1" )" && pwd )"
+else  # 'source bashsh-0'
+  DIR="$( cd "$( dirname "${BASH_SOURCE[1]}" )" && pwd )"
+fi
+
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+# http://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux#comment24883926_5947802
+bold='\033[1m'
+normal='\033[0m'
+
+function QUOTED() {
+  echo "$(printf "%q " "$@")"
+}
+
+function CMD_STR() {
+  echo -ne "$bold" >&2
+  echo "$@" >&2
+  echo -ne "$normal" >&2
+  eval "$@"
+}
+
+function CMD() {
+  CMD_STR "$(QUOTED "$@")"
+}
+
+function MSG() {
+  echo -ne "$bold" >&2
+  echo "# $@" >&2
+  echo -ne "$normal" >&2
+}
+
+function READ_P() {
+  echo -ne "$bold" >&2
+  echo -n "# $1"
+  echo -ne "$normal" >&2
+  shift
+  read "$@" >&2
+}
+
+if [[ "$0" = "${BASH_SOURCE[0]}" ]] ; then  # '#!/usr/bin/env bashsh-0'
+  _program=$1
+  shift
+  . "$_program"
+fi
