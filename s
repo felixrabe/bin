@@ -6,5 +6,5 @@ else
   CMD_STR 'subl -w '"$(printf "%q " "$@")"'&'
 fi
 
-CMD sleep 1.5
+CMD sleep 2
 CMD kill $!
