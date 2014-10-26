@@ -1,6 +1,7 @@
 #!/usr/bin/env bashsh-0
 
-# Cross-platform Sublime Text 3 wrapper
+# Cross-platform Sublime Text 3 wrapper.
+# Needs more love/work.
 
 case "$(uname -s)" in
   Darwin)
@@ -14,7 +15,7 @@ case "$(uname -s)" in
     nano "$@"
     return
     ;;
-  *)
+  *) # MSYS2
     exec '/c/Program Files/Sublime Text 3/subl' "$@"
     ;;
 esac
