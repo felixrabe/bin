@@ -1,0 +1,4 @@
+#!/usr/bin/env bashsh-0
+
+CMD git add -A
+CMD git commit --amend -C HEAD

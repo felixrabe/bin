@@ -1,0 +1,14 @@
+#!/usr/bin/env bashsh-0
+
+# Rebase with -base branch
+
+newbase="$1"
+branch="$2"
+
+if [[ $newbase =~ ^[Hh][Ee][Aa][Dd] ]] ; then
+  echo "Do not use HEAD, use e.g. master instead." >&2
+  exit 1
+fi
+
+CMD git rebase --onto "$newbase" "$branch-base" "$branch"
+CMD git branch -f "$branch-base" "$newbase"

@@ -1,0 +1,15 @@
+#!/usr/bin/env bashsh-0
+
+# Split commit in two commits.
+# Helper script for use with 'git rebase -i' exec lines.
+
+commit_message="${1:-wip}"
+
+CMD_STR 'git branch -D _tmp_make_two > /dev/null 2>&1 || true'
+CMD git branch _tmp_make_two
+CMD git reset HEAD~
+CMD git add -p
+CMD git commit -C _tmp_make_two
+CMD git branch -D _tmp_make_two
+CMD git add -A .
+CMD git commit -m "$commit_message"

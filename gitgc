@@ -1,0 +1,13 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $1 != -f ]] ; then
+  READ_P 'This will aggressively prune .git. Press ENTER or Ctrl-C now.'
+fi
+
+CMD du -sh .git
+
+# https://help.github.com/articles/remove-sensitive-data
+CMD git reflog expire --expire=now --all
+CMD git gc --aggressive --prune=now
+
+CMD du -sh .git

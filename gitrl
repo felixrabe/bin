@@ -1,0 +1,23 @@
+#!/usr/bin/env bashsh-0
+
+# Handy utility after screwing up.
+# Creates (and removes) a bunch of branches for the N most recent reflog entries.
+
+n=50  # default
+
+if [[ $1 != "do" && $1 != "undo" ]] ; then
+  MSG "Usage: gitrl { do [N=$n] | undo }"
+  exit 1
+fi
+
+n=${2:-$n}
+
+if [[ $1 = do ]] ; then
+  git reflog --pretty=tformat:%h | head -n "$n" | sort | uniq | while read b ; do
+    CMD git branch -f "reflog-$b" "$b"
+  done
+elif [[ $1 = undo ]] ; then
+  git branch | fgrep reflog- | while read b ; do
+    CMD git branch -D "$b"
+  done
+fi

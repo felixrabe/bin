@@ -1,0 +1,43 @@
+#!/usr/bin/env bashsh-0
+
+# Wrapper for 'git svn dcommit' for working with an (optional) 'local' branch.
+# Notice how local commit(s) 'A' never get committed to SVN using this process:
+#
+#   (git-svn)--A--(local)--B--(master)
+#
+#   => (with local: git rebase --onto git-svn local master)
+#
+#   (git-svn)--A--(local)
+#        \
+#         B--(master)
+#
+#   => (always: git svn dcommit)
+#
+#   X--A--(local)
+#    \
+#     B--(git-svn = master)
+#
+#   => (with local: git rebase master local)
+#
+#   X--B--(git-svn = master)--A--(local)
+#
+#   => (with local: git rebase local master)
+#
+#   X--B--(git-svn)--A--(local = master)
+
+if git show-ref --verify --quiet refs/heads/local ; then
+  has_local_branch=true
+else
+  has_local_branch=false
+fi
+
+function do_cmd_local() {
+  if $has_local_branch ; then
+    CMD "$@"
+  fi
+}
+
+do_cmd_local   git rebase --onto git-svn local master
+CMD            git svn dcommit
+do_cmd_local   git rebase master local
+do_cmd_local   git rebase local master

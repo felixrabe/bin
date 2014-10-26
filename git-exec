@@ -1,0 +1,40 @@
+#!/usr/bin/env bashsh-0
+
+# Like 'git cherry-pick', but with added execution support.
+
+# When it sees that the commit message starts with '$ ', it will execute the
+# commit, then create a new commit with all the changes, instead of just
+# cherry-picking.
+
+# Commit ranges a..b are supported as well.
+
+if [[ $# -lt 1 ]] ; then
+  MSG "Usage: git-exec <commit>..."
+  exit 1
+fi
+
+function execute_commit() {
+  commit=$1
+  message=$(git cat-file commit "$commit" | sed '1,/^$/d')  # http://stackoverflow.com/a/11314667/1034080
+  if [[ $message == \$\ * ]] ; then
+    # execute and commit
+    CMD_STR "${message#$ }"
+    CMD     git add -A
+    CMD     git commit --allow-empty -C "$commit"
+  else
+    # just cherry-pick
+    CMD     git cherry-pick "$commit"
+  fi
+}
+
+while [[ $# -gt 0 ]] ; do
+  commit=$1
+  shift
+  if [[ $commit == *..* ]] ; then  # range of commits
+    for commit in $(git rev-list --reverse "$commit") ; do
+      execute_commit "$commit"
+    done
+  else  # single commit
+    execute_commit "$commit"
+  fi
+done

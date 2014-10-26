@@ -1,0 +1,13 @@
+#!/usr/bin/env bashsh-0
+
+n=20  # default
+
+if [[ $# -ne 1 ]] ; then
+  MSG "Usage: git-recent-commits filename [N=$n]"
+  exit 1
+fi
+
+filename=$1
+n=${2:-$n}
+
+CMD git log --pretty=format:"%H" -n "$n" -- "$filename" | cat ; echo

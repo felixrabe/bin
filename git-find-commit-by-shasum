@@ -1,0 +1,16 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $# -ne 2 ]] ; then
+  MSG 'Usage: git-find-commit-by-shasum shasum filename'
+  exit 1
+fi
+
+shasum=$1
+filename=$2
+
+git-recent-commits "$filename" | while read commit ; do
+  found=$(git show "$commit":"$filename" | shasum | awk '{ print $1 }')
+  if [[ $shasum = $found ]] ; then
+    echo "$commit"
+  fi
+done
