@@ -1,0 +1,37 @@
+#!/usr/bin/env bashsh-0
+
+interval=0.8  # seconds
+
+usage() {
+  MSG 'Usage: watch-do file... -- command...'
+  exit 1
+}
+
+if [[ $# -lt 3 ]] ; then
+  usage
+fi
+
+files=()
+while true ; do
+  if [[ $# -eq 0 ]] ; then
+    usage
+    exit 1
+  fi
+  if [[ $1 = -- ]] ; then
+    shift
+    break
+  fi
+  files=("${files[@]}" "$1")
+  shift
+done
+
+prev_state=
+
+while true ; do
+  curr_state=$(stat -f '%z %m %c' "${files[@]}")
+  if [[ $prev_state != $curr_state ]] ; then
+    CMD "$@" || true
+    prev_state=$curr_state
+  fi
+  sleep $interval
+done
