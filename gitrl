@@ -5,9 +5,17 @@
 
 n=50  # default
 
-if [[ $1 != "do" && $1 != "undo" ]] ; then
+function usage() {
   MSG "Usage: gitrl { do [N=$n] | undo }"
   exit 1
+}
+
+if [[ $# -lt 1 ]] ; then
+  usage
+fi
+
+if [[ $1 != "do" && $1 != "undo" ]] ; then
+  usage
 fi
 
 n=${2:-$n}

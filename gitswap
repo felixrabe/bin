@@ -1,7 +1,4 @@
-#!/usr/bin/env bash
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-. "$DIR/fn"
+#!/usr/bin/env bashsh-0
 
 tmp_branch=tmp-swap-before
 
