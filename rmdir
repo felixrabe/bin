@@ -1,0 +1,18 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $# -eq 0 ]] ; then
+  exec /bin/rmdir
+fi
+
+# TODO: Removal of .DS_Store needs to be recursive too!
+p=
+if [[ $1 = "-p" ]] ; then
+  p=-p
+  shift
+fi
+
+# http://stackoverflow.com/a/6426901/1034080
+ds_stores=( "${@/%//.DS_Store}" )
+
+CMD /bin/rm -f "${ds_stores[@]}"
+CMD /bin/rmdir $p "$@"
