@@ -1,0 +1,5 @@
+#!/usr/bin/env bashsh-0
+
+CMD      git status
+CMD_STR 'gitk --all &'
+"$DIR/s" .
