@@ -8,5 +8,5 @@ fi
 if [[ -d $1 ]] ; then
   CMD ls -al "$1"
 else
-  CMD less "$@"
+  CMD zless "$@"
 fi
