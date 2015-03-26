@@ -1,7 +1,7 @@
 #!/usr/bin/env bashsh-0
 
 if [[ $1 != -f ]] ; then
-  READ_P 'This will aggressively prune .git. Press ENTER or Ctrl-C now.'
+  READ_P 'This will aggressively prune .git. ENTER to continue or Ctrl-C to abort.'
 fi
 
 CMD du -sh .git
