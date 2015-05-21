@@ -1,0 +1,3 @@
+#!/usr/bin/env bashsh-0
+
+CMD_STR "curl -s https://api.github.com/repos/$1 | grep created_at"
