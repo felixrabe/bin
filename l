@@ -5,8 +5,12 @@ if [[ $# -eq 0 ]] ; then
   set -- .
 fi
 
-if [[ $# -gt 1 || -d $1 ]] ; then
-  CMD ls -alG "$@"
+if [[ $# -eq 1 ]] ; then
+  if [[ ! -d $1 ]] ; then
+    CMD zless "$@"
+  else
+    CMD ls -alG "$@"
+  fi
 else
-  CMD zless "$@"
+  CMD ls -aldG "$@"
 fi
