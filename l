@@ -5,7 +5,7 @@ if [[ $# -eq 0 ]] ; then
   set -- .
 fi
 
-if [[ -d $1 ]] ; then
+if [[ $# -gt 1 || -d $1 ]] ; then
   CMD ls -alG "$1"
 else
   CMD zless "$@"

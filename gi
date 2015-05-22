@@ -1,7 +1,7 @@
 #!/usr/bin/env bashsh-0
 
 if [[ -d ./.git ]] ; then
-  echo 'ERROR: Already has a Git repository, aborting.' >&2
+  MSG 'ERROR: Already has a Git repository, aborting.'
   exit 1
 fi
 

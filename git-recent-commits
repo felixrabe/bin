@@ -2,7 +2,7 @@
 
 n=20  # default
 
-if [[ $# -ne 1 ]] ; then
+if [[ $# -ne 1 && $# -ne 2 ]] ; then
   MSG "Usage: git-recent-commits filename [N=$n]"
   exit 1
 fi
