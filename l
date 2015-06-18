@@ -7,7 +7,11 @@ fi
 
 if [[ $# -eq 1 ]] ; then
   if [[ ! -d $1 ]] ; then
-    CMD zless "$@"
+    if [[ $1 == *.gz ]] ; then
+      CMD zless "$@"
+    else
+      CMD less "$@"
+    fi
   else
     CMD ls -alG "$@"
   fi
