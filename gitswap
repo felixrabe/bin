@@ -7,11 +7,11 @@ if git show-ref --verify --quiet refs/heads/"$tmp_branch" ; then
 fi
 
 CMD git branch "$tmp_branch"
-CMD git reset head~2
+CMD git reset HEAD~2
 CMD git add -A .
 CMD git commit -C "$tmp_branch"
 CMD git reset --hard "$tmp_branch"~
-CMD git reset head@{1}
+CMD git reset HEAD@{1}
 CMD git add -A .
 CMD git commit -C "$tmp_branch"~
 CMD git branch -D "$tmp_branch"
