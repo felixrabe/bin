@@ -5,6 +5,12 @@ if [[ $# -eq 0 ]] ; then
   set -- .
 fi
 
+if [[ $(uname -s) = Darwin ]] ; then
+  color_flag=-G
+else
+  color_flag=--color=auto
+fi
+
 if [[ $# -eq 1 ]] ; then
   if [[ ! -d $1 ]] ; then
     if [[ $1 == *.gz ]] ; then
@@ -13,8 +19,8 @@ if [[ $# -eq 1 ]] ; then
       CMD less "$@"
     fi
   else
-    CMD ls -alG "$@"
+    CMD ls -al $color_flag "$@"
   fi
 else
-  CMD ls -aldG "$@"
+  CMD ls -ald $color_flag "$@"
 fi
