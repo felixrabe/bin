@@ -1,0 +1,23 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $# -lt 1 ]] ; then
+  MSG 'Usage: git-l <commit> [<dir/file>]'
+  exit 1
+fi
+
+commit=$1
+thing=${2:-}
+if [[ $thing = . ]] ; then
+  thing=''
+fi
+type=$(CMD git cat-file -t "$commit:$thing")
+
+if [[ $type = tree ]] ; then
+  CMD git ls-tree "$commit:$thing"
+elif [[ $type = blob ]] ; then
+  CMD git cat-file blob "$commit:$thing"
+  echo
+else
+  MSG "ERROR: Unknown object type: $type"
+  exit 1
+fi
