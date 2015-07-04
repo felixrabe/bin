@@ -1,6 +1,6 @@
 #!/usr/bin/env bashsh-0
 
-if [[ $1 != -f ]] ; then
+if [[ $# -lt 1 || $1 != -f ]] ; then
   READ_P 'This will aggressively prune .git. ENTER to continue or Ctrl-C to abort.'
 fi
 
