@@ -1,4 +1,10 @@
 #!/usr/bin/env bashsh-0
 
-CMD git add -A
+force=
+if [[ $# -ge 1 && $1 = -f ]] ; then
+  force=-f
+  shift
+fi
+
+CMD git add -A $force
 CMD git commit -m "$@"
