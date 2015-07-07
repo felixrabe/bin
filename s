@@ -3,7 +3,7 @@
 if [[ $# -eq 0 ]] ; then
   CMD_STR 'subl -w . &'
 else
-  CMD_STR 'subl -w '"$(printf "%q " "$@")"'&'
+  CMD_STR 'subl -w '"$(QUOTED "$@")"' &'
 fi
 
 CMD sleep 2

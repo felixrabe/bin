@@ -2,4 +2,4 @@
 
 CMD "$@"
 CMD git add -A .
-CMD git commit -m '$'"$(printf " %q" "$@")"
+CMD git commit -m '$ '"$(QUOTED "$@")"
