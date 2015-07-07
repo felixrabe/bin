@@ -1,0 +1,6 @@
+#!/usr/bin/env bashsh-0
+
+dir=${1:-.}
+
+# http://stackoverflow.com/a/9052878/1034080
+CMD_STR 'find '"$(QUOTED "$dir")"' -type f -print0 | xargs -0 stat -f "%m %N" | sort -rn | head -1 | cut -f2- -d" "'
