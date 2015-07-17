@@ -10,7 +10,7 @@ thing=${2:-}
 if [[ $thing = . ]] ; then
   thing=''
 fi
-type=$(CMD git cat-file -t "$commit:$thing")
+type=$(git cat-file -t "$commit:$thing")
 
 if [[ $type = tree ]] ; then
   CMD git ls-tree "$commit:$thing"
