@@ -9,9 +9,9 @@ Installation
 
 Clone https://github.com/felixrabe/bin and put it on your path. For example:
 
-    i=~/bin
-    git clone "https://github.com/felixrabe/bin" "$i"
-    echo export PATH=\$PATH:"$(printf "%q" "$i")" >> ~/.profile
+    to=~/bin
+    git clone "https://github.com/felixrabe/bin" "$to"
+    echo export PATH=\$PATH:"$(printf "%q" "$to")" >> ~/.profile
 
 Don't forget to disable aliases like `l` in your `.bashrc` (or similar file).
 
