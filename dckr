@@ -1,0 +1,6 @@
+#!/usr/bin/env bashsh-0
+
+machine=$1
+shift
+CMD_STR 'eval "$(docker-machine env "$machine")"'
+CMD docker "$@"
