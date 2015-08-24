@@ -7,7 +7,7 @@ shift
 # would not exit if substituted command fails. See
 # http://unix.stackexchange.com/q/81457/41217 for details.
 ECHO "eval \"\$(docker-machine env $(QUOTED "$machine"))\""
-docker_env="$(docker-machine env $(QUOTED "$machine"))"
+docker_env="$(docker-machine env "$machine")"
 eval "$docker_env"
 
 CMD docker "$@"
