@@ -1,0 +1,12 @@
+#!/usr/bin/env bashsh-0
+
+dest=${1:-.}
+
+if [[ $(uname -s) = Darwin ]] ; then
+  all_shots=( ~/Desktop/Screen\ Shot*.png )
+  newest_shot=${all_shots[${#all_shots[@]}-1]}
+  CMD mv "$newest_shot" "$dest"
+else
+  MSG "ERROR: Operating system ($(uname -s)) is not supported."
+  CMD exit 1
+fi
