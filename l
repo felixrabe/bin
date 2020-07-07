@@ -11,6 +11,12 @@ else
   color_flag=--color=auto
 fi
 
+if [[ $(uname -s) = Linux ]] ; then
+  aux_flag=-Gh
+else
+  aux_flag=-h
+fi
+
 if [[ $# -eq 1 ]] ; then
   if [[ ! -d $1 ]] ; then
     if [[ $1 == *.gz ]] ; then
@@ -19,7 +25,7 @@ if [[ $# -eq 1 ]] ; then
       CMD less "$@"
     fi
   else
-    CMD ls -al $color_flag "$@"
+    CMD ls -al $color_flag $aux_flag "$@"
   fi
 else
   CMD ls -ald $color_flag "$@"
