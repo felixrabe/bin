@@ -8,12 +8,16 @@ case "$(uname -s)" in
     exec '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' "$@"
     ;;
   Linux)
-    if [[ "$1" = "-w" ]] ; then
-      shift  # chop off '-w'
+    if [[ -e /usr/bin/subl ]] ; then
+      exec /usr/bin/subl "$@"
+    else
+      if [[ "$1" = "-w" ]] ; then
+        shift  # chop off '-w'
+      fi
+      MSG "WARNING: Actually executing: nano $@"
+      nano "$@"
+      return
     fi
-    MSG "WARNING: Actually executing: nano $@"
-    nano "$@"
-    return
     ;;
   *) # MSYS2
     exec '/c/Program Files/Sublime Text 3/subl' "$@"
