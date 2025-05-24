@@ -16,6 +16,19 @@ Clone <https://github.com/felixrabe/bin> and put it on your path. For example:
 Remember to disable aliases like `l` in your `.bashrc` (or similar file).
 
 
+"pop_var_context: head of shell_variables not a function context"
+-----------------------------------------------------------------
+
+This seems to be a confusing but harmless message introduced in recent(ish) Bash
+versions. For more information, see:
+
+<https://lists.gnu.org/archive/html/bug-bash/2024-02/msg00096.html>:
+
+> it will be fixed in the next bash version.
+
+TODO: Implement a workaround to silence this message.
+
+
 License
 -------
 
