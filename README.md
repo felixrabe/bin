@@ -7,13 +7,13 @@ A number of tools I use daily in my Unix command lines (OS X, Linux, Mingw).
 Installation
 ------------
 
-Clone https://github.com/felixrabe/bin and put it on your path. For example:
+Clone <https://github.com/felixrabe/bin> and put it on your path. For example:
 
     to=~/bin
     git clone "https://github.com/felixrabe/bin" "$to"
     echo export PATH=\$PATH:"$(printf "%q" "$to")" >> ~/.profile
 
-Don't forget to disable aliases like `l` in your `.bashrc` (or similar file).
+Remember to disable aliases like `l` in your `.bashrc` (or similar file).
 
 
 License
