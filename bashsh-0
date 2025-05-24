@@ -19,8 +19,8 @@ else  # 'source bashsh-0'
   DIR="$( cd "$( dirname "${BASH_SOURCE[1]}" )" && pwd )"
 fi
 
-# http://misc.flogisoft.com/bash/tip_colors_and_formatting
-# http://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux#comment24883926_5947802
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux#comment24883926_5947802
 if [[ "$(uname -s)" = "Darwin" || "$(uname -s)" = "Linux" ]] ; then
   bold='\033[1m'
 else

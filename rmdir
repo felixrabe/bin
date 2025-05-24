@@ -11,7 +11,7 @@ if [[ $1 = "-p" ]] ; then
   shift
 fi
 
-# http://stackoverflow.com/a/6426901/1034080
+# https://stackoverflow.com/a/6426901/1034080
 ds_stores=( "${@/%//.DS_Store}" )
 
 CMD /bin/rm -f "${ds_stores[@]}"
