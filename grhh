@@ -1,3 +1,0 @@
-#!/usr/bin/env bashsh-0
-
-"$DIR/grh" HEAD  # git reset --hard HEAD

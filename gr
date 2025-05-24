@@ -1,0 +1,8 @@
+#!/usr/bin/env bashsh-0
+
+if [[ $# -gt 0 && $1 = H ]] ; then
+  shift
+  set -- HEAD~ "$@"
+fi
+
+CMD git reset "$@"
