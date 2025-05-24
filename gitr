@@ -2,8 +2,13 @@
 
 # Rebase with -base branch
 
-newbase="$1"
-branch="$2"
+if [[ $# -ge 2 ]] ; then
+  newbase="$1"
+  branch="$2"
+else
+  newbase=$(git-current-branch)
+  branch="$1"
+fi
 
 if [[ $newbase =~ ^[Hh][Ee][Aa][Dd] ]] ; then
   echo "Do not use HEAD, use e.g. master instead." >&2

@@ -1,3 +1,9 @@
 #!/usr/bin/env bashsh-0
 
-CMD_STR "curl -s https://api.github.com/repos/$1 | grep created_at"
+# `command -v`: https://unix.stackexchange.com/a/85250 (I've just read the summary)
+
+if command -v jq > /dev/null ; then
+    CMD_STR "curl -s https://api.github.com/repos/$1 | jq .created_at"
+else
+    CMD_STR "curl -s https://api.github.com/repos/$1 | grep created_at"
+fi

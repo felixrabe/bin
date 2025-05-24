@@ -5,6 +5,12 @@
 
 n=50  # default
 
+version=1
+if [[ $# -ge 1 && "$1" = "--version-2" ]] ; then
+  version=2
+  shift
+fi
+
 function usage() {
   MSG "Usage: gitrl { do [N=$n] | undo }"
   exit 1
@@ -21,9 +27,15 @@ fi
 n=${2:-$n}
 
 if [[ $1 = do ]] ; then
-  git reflog --pretty=tformat:%h | head -n "$n" | sort | uniq | while read b ; do
-    CMD git branch -f "reflog-$b" "$b"
-  done
+  if [[ $version -eq 1 ]] ; then
+    for i in `seq $n` ; do
+      CMD git branch -f "reflog-head-$i" "HEAD@{$i}"
+    done
+  else
+    git reflog --pretty=tformat:%h | head -n "$n" | sort | uniq | while read b ; do
+      CMD git branch -f "reflog-$b" "$b"
+    done
+  fi
 elif [[ $1 = undo ]] ; then
   git branch | fgrep reflog- | while read b ; do
     CMD git branch -D "$b"

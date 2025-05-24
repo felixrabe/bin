@@ -1,7 +1,17 @@
 #!/usr/bin/env bashsh-0
 
+version=1
+if [[ $# -ge 1 && "$1" = "--version-2" ]] ; then
+  version=2
+  shift
+fi
+
 if [[ $# -eq 0 ]] ; then
-  CMD_STR 'gitk --all &'
+  if [[ $version -eq 1 ]] ; then
+    CMD_STR 'gitk --branches &'
+  else
+    CMD_STR 'gitk --all &'
+  fi
 else
   CMD_STR 'gitk '"$(printf "%q " "$@")"'&'
 fi

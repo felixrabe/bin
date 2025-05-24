@@ -1,5 +1,9 @@
 #!/usr/bin/env bashsh-0
 
+# If .DS_Store exists, removes it first.
+#
+# Supports the `-p` flag as first argument.
+
 if [[ $# -eq 0 ]] ; then
   exec /bin/rmdir
 fi
@@ -12,7 +16,18 @@ if [[ $1 = "-p" ]] ; then
 fi
 
 # https://stackoverflow.com/a/6426901/1034080
-ds_stores=( "${@/%//.DS_Store}" )
+stripped=( "${@/%\/}" )
+ds_stores=( "${stripped[@]/%//.DS_Store}" )
 
-CMD /bin/rm -f "${ds_stores[@]}"
+ds_stores_found=false
+for d in "${ds_stores[@]}" ; do
+  if [[ -f "$d" ]] ; then
+    ds_stores_found=true
+    break
+  fi
+done
+
+if $ds_stores_found ; then
+  CMD /bin/rm -f "${ds_stores[@]}"
+fi
 CMD /bin/rmdir $p "$@"
